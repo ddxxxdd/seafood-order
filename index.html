@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深蓝鲜集 - 水产品下单</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="深蓝鲜集首页">
+          <span class="brand-mark">鲜</span>
+          <span>
+            <strong>深蓝鲜集</strong>
+            <small>水产品订购</small>
+          </span>
+        </a>
+        <nav class="top-actions" aria-label="订单入口">
+          <a href="#products">选购</a>
+          <a href="#checkout">配送</a>
+          <button class="cart-jump" type="button" id="cartJump" aria-label="查看购物车">
+            <span>购物车</span>
+            <strong id="cartBadge">0</strong>
+          </button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero-band" aria-labelledby="pageTitle">
+          <img src="./assets/seafood-hero.png" alt="新鲜鱼虾贝蟹铺在碎冰上的水产陈列" />
+          <div class="hero-copy">
+            <p class="eyebrow">今日鲜活 · 冷链到家</p>
+            <h1 id="pageTitle">水产品即时下单</h1>
+            <p>鱼虾蟹贝分区选购，规格、数量、配送信息一页完成。</p>
+            <div class="hero-metrics" aria-label="服务摘要">
+              <span><strong>2小时</strong>同城达</span>
+              <span><strong>0-4°C</strong>冷链</span>
+              <span><strong>298元</strong>免配送</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="order-layout" id="products">
+          <div class="catalog-area">
+            <div class="toolbar">
+              <div>
+                <p class="section-kicker">商品池</p>
+                <h2>选择水产</h2>
+              </div>
+              <label class="search-box" for="searchInput">
+                <span aria-hidden="true">⌕</span>
+                <input id="searchInput" type="search" placeholder="搜索鱼、虾、蟹、贝" autocomplete="off" />
+              </label>
+            </div>
+
+            <div class="category-tabs" role="tablist" aria-label="商品分类">
+              <button class="active" type="button" data-category="all">全部</button>
+              <button type="button" data-category="live">鲜活</button>
+              <button type="button" data-category="fish">鱼类</button>
+              <button type="button" data-category="shell">贝类</button>
+              <button type="button" data-category="ready">即食</button>
+            </div>
+
+            <div class="product-grid" id="productGrid" aria-live="polite"></div>
+          </div>
+
+          <aside class="checkout-panel" id="checkout" aria-labelledby="cartTitle">
+            <div class="cart-head">
+              <div>
+                <p class="section-kicker">订单</p>
+                <h2 id="cartTitle">购物车</h2>
+              </div>
+              <button class="clear-btn" type="button" id="clearCart">清空</button>
+            </div>
+
+            <div class="cart-list" id="cartList"></div>
+
+            <div class="order-total" aria-label="费用汇总">
+              <div><span>商品小计</span><strong id="subtotal">¥0.00</strong></div>
+              <div><span>冷链包装</span><strong id="packFee">¥0.00</strong></div>
+              <div><span>配送费</span><strong id="deliveryFee">¥0.00</strong></div>
+              <div class="grand"><span>应付合计</span><strong id="grandTotal">¥0.00</strong></div>
+            </div>
+
+            <form class="delivery-form" id="orderForm">
+              <div class="form-row">
+                <label for="customerName">收货人</label>
+                <input id="customerName" name="customerName" type="text" placeholder="请输入姓名" required />
+              </div>
+              <div class="form-row">
+                <label for="phone">联系电话</label>
+                <input id="phone" name="phone" type="tel" placeholder="请输入手机号" required />
+              </div>
+              <div class="form-row">
+                <label for="address">配送地址</label>
+                <textarea id="address" name="address" rows="2" placeholder="小区、楼栋、门牌号" required></textarea>
+              </div>
+              <div class="form-split">
+                <div class="form-row">
+                  <label for="deliveryDate">配送日期</label>
+                  <input id="deliveryDate" name="deliveryDate" type="date" required />
+                </div>
+                <div class="form-row">
+                  <label for="deliverySlot">时段</label>
+                  <select id="deliverySlot" name="deliverySlot" required>
+                    <option value="09:00-11:00">09:00-11:00</option>
+                    <option value="11:00-13:00">11:00-13:00</option>
+                    <option value="14:00-16:00">14:00-16:00</option>
+                    <option value="16:00-18:00">16:00-18:00</option>
+                  </select>
+                </div>
+              </div>
+              <fieldset class="pay-method">
+                <legend>支付方式</legend>
+                <label><input type="radio" name="payMethod" value="微信支付" checked /> 微信支付</label>
+                <label><input type="radio" name="payMethod" value="到货付款" /> 到货付款</label>
+              </fieldset>
+              <div class="form-row">
+                <label for="note">备注</label>
+                <input id="note" name="note" type="text" placeholder="如：去壳、分装、少冰" />
+              </div>
+              <p class="order-status" id="orderStatus" role="status" aria-live="polite"></p>
+              <button class="submit-order" type="submit">提交订单</button>
+            </form>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="receipt-dialog" id="receiptDialog">
+      <div class="receipt">
+        <button class="dialog-close" type="button" id="closeReceipt" aria-label="关闭订单回执">×</button>
+        <p class="section-kicker">下单成功</p>
+        <h2>订单已生成</h2>
+        <div id="receiptContent"></div>
+        <button class="submit-order" type="button" id="finishReceipt">完成</button>
+      </div>
+    </dialog>
+
+    <script src="./config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

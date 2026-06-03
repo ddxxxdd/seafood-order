@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深蓝鲜集 - 上线管理</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="返回下单页">
+          <span class="brand-mark">鲜</span>
+          <span>
+            <strong>深蓝鲜集</strong>
+            <small>上线管理</small>
+          </span>
+        </a>
+        <nav class="top-actions" aria-label="管理入口">
+          <a href="./index.html">下单页</a>
+        </nav>
+      </header>
+
+      <main class="admin-layout">
+        <section class="admin-panel" aria-labelledby="inventoryTitle">
+          <p class="section-kicker">库存</p>
+          <h1 id="inventoryTitle">当前库存</h1>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>商品</th>
+                <th>规格</th>
+                <th>当前</th>
+                <th>初始</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryRows"></tbody>
+          </table>
+        </section>
+
+        <aside class="admin-panel">
+          <p class="section-kicker">上线前</p>
+          <h2>清空并恢复库存</h2>
+          <div class="admin-actions">
+            <button class="secondary-btn" type="button" id="refreshInventory">刷新库存</button>
+            <button class="danger-btn" type="button" id="resetLocal">重置本地数据</button>
+            <input id="adminToken" type="password" placeholder="远端管理密钥" autocomplete="off" />
+            <button class="danger-btn" type="button" id="resetRemote">重置远端数据</button>
+            <p class="order-status" id="adminStatus" role="status" aria-live="polite"></p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./config.js"></script>
+    <script src="./admin.js"></script>
+  </body>
+</html>
